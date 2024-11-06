@@ -4,7 +4,7 @@ RUN apk update && \
         build-base \
         cmake \
         libstdc++
-COPY cmake-hello-world-example /source
+COPY cmake-hello-world-example/ /source
 RUN cmake -S /source -B /build && \
     cmake --build /build && \
     cmake --install /build
