@@ -8,7 +8,7 @@ def configure(c):
     factory.addStep(steps.ShellCommand(command=["docker", "build", "."]))
     c['change_source'].append(changes.GitPoller(
         c['repository_url'],
-        workdir='gitpoller-workdir', branch=c['branch_name'],
+        workdir='gitpoller-workdir', branch=branch_name,
         pollInterval=15)
     )
     c['builders'].append(util.BuilderConfig(
