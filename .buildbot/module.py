@@ -2,13 +2,12 @@ from buildbot.plugins import *
 
 def configure(c, o):
     builder_name = "runtests"
-    branch_name = 'main'
     factory = util.BuildFactory()
     factory.addStep(steps.Git(repourl=o['repository_url'], mode='incremental'))
     factory.addStep(steps.ShellCommand(command=["docker", "build", "."]))
     c['change_source'].append(changes.GitPoller(
         o['repository_url'],
-        workdir='gitpoller-workdir', branch=branch_name,
+        workdir='gitpoller-workdir', branch=o['branch_name'],
         pollInterval=15)
     )
     c['builders'].append(util.BuilderConfig(
@@ -22,7 +21,10 @@ def configure(c, o):
     )
     c['schedulers'].append(schedulers.SingleBranchScheduler(
         name="all",
-        change_filter=util.ChangeFilter(branch=branch_name),
+        change_filter=util.ChangeFilter(
+            repository=o['repository_url'],
+            branch=o['branch_name']
+        ),
         treeStableTimer=None,
         builderNames=[builder_name])
     )
