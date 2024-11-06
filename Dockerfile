@@ -5,7 +5,8 @@ RUN apk update && \
         cmake \
         libstdc++
 COPY cmake-hello-world-example/ /source
-RUN cmake -S /source -B /build && \
+RUN ls -lah /source && \
+    cmake -S /source -B /build && \
     cmake --build /build && \
     cmake --install /build
 RUN addgroup -S clsqrt && adduser -S clsqrt -G clsqrt
