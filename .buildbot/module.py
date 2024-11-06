@@ -1,12 +1,14 @@
 from buildbot.plugins import *
 
 def configure(c):
+    builder_name = "runtests"
+    branch_name = 'main'
     factory = util.BuildFactory()
-    factory.addStep(steps.Git(repourl=repository_url, mode='incremental'))
+    factory.addStep(steps.Git(repourl=c['repository_url'], mode='incremental'))
     factory.addStep(steps.ShellCommand(command=["docker", "build", "."]))
     c['change_source'].append(changes.GitPoller(
         repository_url,
-        workdir='gitpoller-workdir', branch=branch_name,
+        workdir='gitpoller-workdir', branch=c['branch_name'],
         pollInterval=15)
     )
     c['builders'].append(util.BuilderConfig(
