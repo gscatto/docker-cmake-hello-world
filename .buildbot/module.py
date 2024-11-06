@@ -1,7 +1,7 @@
 from buildbot.plugins import *
 
 def configure(c, o):
-    # trigger a change in buildbot configuration
+    # trigger another change in buildbot configuration
     builder_name = "runtests"
     factory = util.BuildFactory()
     factory.addStep(steps.Git(repourl=o['repository_url'], mode='incremental'))
