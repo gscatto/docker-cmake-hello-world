@@ -1,7 +1,7 @@
 FROM alpine/git AS downloader
 RUN git clone --depth 1 https://github.com/CMHJ/cmake-hello-world-example.git /source
 
-FROM alpine AS build
+FROM alpine
 RUN apk update && \
     apk add --no-cache \
         build-base \
