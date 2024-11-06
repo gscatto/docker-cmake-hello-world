@@ -4,11 +4,10 @@ RUN apk update && \
         build-base \
         cmake \
         libstdc++
-COPY cmake-hello-world-example/ /source
-RUN ls -lah /source && \
-    cmake -S /source -B /build && \
-    cmake --build /build && \
-    cmake --install /build
+COPY cmake-hello-world-example source
+RUN cmake -S source -B build && \
+    cmake --build build && \
+    cmake --install build
 RUN addgroup -S clsqrt && adduser -S clsqrt -G clsqrt
 USER clsqrt
 ENTRYPOINT ["clsqrt"]
