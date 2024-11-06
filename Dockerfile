@@ -2,18 +2,12 @@ FROM alpine AS build
 RUN apk update && \
     apk add --no-cache \
         build-base \
-        cmake
+        cmake \
+        libstdc++
 COPY cmake-hello-world-example source
-RUN cmake -S source -G Ninja && \
-    cmake --build
-
-FROM alpine
-RUN apk update && \
-    apk add --no-cache \
-    libstdc++
-RUN addgroup -S hello && adduser -S hello -G hello
-USER hello
-COPY --chown=shs:shs --from=build \
-    build/clsqrt \
-    app/clsqrt
-ENTRYPOINT ["app/clsqrt"]
+RUN cmake -S source -B build && \
+    cmake --build build && \
+    cmake --install build
+RUN addgroup -S hello && adduser -S clsqrt -G clsqrt
+USER clsqrt
+ENTRYPOINT ["clsqrt"]
