@@ -1,0 +1,3 @@
+[submodule "cmake-hello-world-example"]
+	path = cmake-hello-world-example
+	url = https://github.com/CMHJ/cmake-hello-world-example.git
