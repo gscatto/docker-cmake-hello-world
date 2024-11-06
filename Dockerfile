@@ -14,3 +14,4 @@ RUN cmake -S source -B build && \
 RUN addgroup -S clsqrt && adduser -S clsqrt -G clsqrt
 USER clsqrt
 ENTRYPOINT ["clsqrt"]
+# trigger a change here
