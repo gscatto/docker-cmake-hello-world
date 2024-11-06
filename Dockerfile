@@ -9,7 +9,7 @@ RUN apk update && \
         libstdc++
 COPY --from=downloader /source source
 RUN cmake -S source -B build && \
-    cmake --build build && \
+    cmke --build build && \
     cmake --install build
 RUN addgroup -S clsqrt && adduser -S clsqrt -G clsqrt
 USER clsqrt
